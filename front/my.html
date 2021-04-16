@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        aside {
+            width: 14vw;
+            box-shadow: 1px 1px 7px 0px #c6c6c6;
+        }
+
+        section {
+            width: 86vw;
+        }
+
+        .userbox {
+            margin: 64px 0;
+        }
+
+        .userbox img {
+            display: block;
+            margin: 0 auto;
+            width: 68px;
+            height: 68px;
+            border-radius: 100%;
+        }
+
+        .userbox p {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .nav {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+
+        .nav li {
+            margin: 20px 8px;
+            padding: 4px 12px;
+            font-size: 22px;
+        }
+
+        .nav li:hover {
+            color: #fff;
+            background: rgb(116, 182, 245);
+            cursor: pointer;
+        }
+
+        .nav li:hover i {
+            color: #fff;
+        }
+
+        .components {
+            display: none;
+        }
+
+        #home-component {
+            display: block;
+        }
+
+
+
+        /* chats-component */
+        #chats-component > div{
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #chat-list {
+            width: 324px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow-y: scroll;
+            height: 99vh;
+        }
+
+        #chat-list li {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #chat-list li:hover {
+            cursor: pointer;
+            background: rgb(231, 231, 231);
+        }
+        
+        #chat-list li > div {
+            margin: 0 12px;
+        }
+
+        /* 
+        텍스트 박스
+        */
+        #chat-list li > div:nth-child(2) > p{
+            width: 150px;
+            height: 24px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
+        
+        #chat-list li > div:nth-child(2) > p:first-child{
+            font-weight: bold;
+        }
+
+        #chat-list li > div:last-child{
+            text-align: center;
+            color: #fff;
+            width: 24px ;
+            height: 24px;
+            border-radius: 100%;
+            background: rgb(255, 52, 93);
+        }
+
+        #chat-list li img{
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+
+
+        #chats-component > div:last-child {
+            background: #eee;
+            width: calc(100vw - 14vw - 330px);
+            height: 100vh;
+        }
+
+
+        #chat-detail-container {
+            margin: auto;
+            padding: 24px;
+            background: #fff;
+            width: 80%;
+            height: 80%;
+            margin-top: calc(100vh - 110%);
+        }
+
+        #chat-detail-container ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-detail-container > div:nth-child(2) {
+            height: 90%;
+            overflow-y: scroll;
+        }
+
+        #chat-detail-container ul li {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #chat-detail-container ul li p, #chat-detail-container ul li span {
+            margin-right: 12px;
+        }
+
+        #chat-detail-container ul li p {
+            box-shadow: 1px 1px 5px 2px #e1e1e1;
+            padding: 12px;
+            border-radius: 12px;
+            background:rgb(197, 218, 255) ;
+        }
+
+        #chat-detail-container ul li.me p {
+           background: #fff;
+        }
+
+        #chat-detail-container ul li.me {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #chat-detail-container ul img {
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+        }
+
+        #input-wrap {
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #input-wrap >div:nth-child(2) {
+            display: block;
+            width: 80%;
+        }
+        #input-wrap > div:nth-child(2) > input {
+            width: 100%;
+            height: 32px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <aside>
+            <div class="userbox">
+
+                <img src="https://source.unsplash.com/random" alt="random image">
+                <p>username</p>
+
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li component="home">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </li>
+                    <li component="chat">
+                        <i class="fas fa-comments"></i>
+                        Chat
+                    </li>
+                    <li component="setting">
+                        <i class="fas fa-cog"></i>
+                        Setting
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <section>
+            <div class="components" id="home-component" component="home">
+                home
+            </div>
+            <div class="components" id="chats-component" component="chat">
+                <div>
+                    <ul id="chat-list">
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="https://source.unsplash.com/random" alt="random image">
+                            </div>
+                            <div>
+                                <p>대가리대가리대가리대가리대가리대가리대가리대가리대가리대가리</p>
+                                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+                            </div>
+                            <div>
+                                1
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div id="chat-detail-container">
+                        <div>
+                            대화
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <span >
+                                        <img src="https://source.unsplash.com/random" alt="random image">
+                                    </span>
+                                    <p>asdasdasd</p>
+                                    <span>...</span>
+                                </li>
+                                <li class="me">
+                                    <span >
+                                        <img src="https://source.unsplash.com/random" alt="random image">
+                                    </span>
+                                    <p>asdasdasd</p>
+                                    <span>...</span>
+                                </li>
+                                <li class="me">
+                                    <span >
+                                        <img src="https://source.unsplash.com/random" alt="random image">
+                                    </span>
+                                    <p>asdasdasd</p>
+                                    <span>...</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="input-wrap">
+                            <div>
+                                <i class="fas fa-plus"></i> 
+                            </div>
+                            <div>
+                                <input type="text">
+                            </div>
+                            <div>
+                                Send
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="components" id="setting-component" component="setting">
+                setting
+            </div>
+            <div class="components" id="notfound-component" component="404">
+                404
+            </div>
+        </section>
+    </main>
+    <script>
+
+        const store = {
+            get: () => localStorage.getItem('currentComponent'),
+            set: (component) => localStorage.setItem('currentComponent', component)
+        };
+
+        (() => {
+            const components = document.getElementsByClassName('components');
+            const navButton = document.querySelectorAll('.nav li');
+
+            function initView () {
+                for (let i = 0; i < components.length; i++) {
+                    components[i].style.display = 'none';
+                }
+
+                const target = Array
+                        .from(components)
+                        .find(el => el.getAttribute('component') === store.get())
+
+                if (target.style !== undefined || target.style !== null) {
+                    target.style.display = 'block';
+                } else {
+                    Array
+                        .from(components)
+                        .find(el => el.getAttribute('component') === '404')
+                        .style.display = 'block';
+                }
+            }
+
+            if (store.get() === undefined || store.get() === null) store.set('home');
+            else initView();
+
+            Array
+                .from(navButton)
+                .map(btn => btn.addEventListener('click', function () {
+                    store.set(
+                        this.getAttribute('component')
+                    );
+
+                    initView();
+                }))
+        })()
+    </script>
+</body>
+
+</html>

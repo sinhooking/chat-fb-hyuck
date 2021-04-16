@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .login-wrap {
+            display: flex;
+            justify-content: space-between;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .login-form,
+        .login-img {
+            display: inline-block;
+            height: 100%;
+            width: 48%;
+        }
+
+        .login-form {
+            margin: 0 auto;
+            margin-top: 25%;
+            height: 50%;
+        }
+
+        label {
+            text-align: right;
+            display: block;
+            width: 320px;
+            margin: 0 auto;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+
+        .btn-wrap {
+            width: 330px;
+            margin: 0 auto;
+        }
+
+        input {
+            display: block;
+            margin: 4px 0;
+            min-width: 320px;
+            height: 24px;
+            border: 0;
+            transition: .4s ease-in;
+            border-bottom: 1px solid #eee;
+        }
+
+        input:focus {
+            border: unset;
+            outline: unset;
+            border-bottom: 2px solid rgb(126, 49, 250);
+        }
+
+        button {
+            font-size: 16px;
+            height: 32px;
+            padding: 4px 24px;
+            width: 48%;
+            background: unset;
+            border: unset;
+        }
+
+        button:hover {
+            cursor: pointer;
+            background: rgb(116, 182, 245);
+            color: #fff;
+        }
+
+        button:focus,
+        button:active {
+            outline: unset;
+        }
+
+
+        #hidden-modal {
+            
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: rgba(46, 46, 46, 0.384);
+        }
+
+        .modal-form {
+            z-index: 10;
+            text-align: center;
+            padding: 12px;
+            background: #fff;
+            width: 50%;
+            height: 50%;
+        }
+
+        form {
+            margin-top: 60px;
+        }
+
+        form input {
+            font-size: 22px;
+            height: 32px;
+        }
+
+        form label {
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-wrap">
+        <div class="login-img">
+            <img src="https://source.unsplash.com/random" alt="random image">
+        </div>
+        <div class="login-form">
+            <div>
+                <label for="id">
+                    username
+                    <input type="text" id="id">
+                </label>
+            </div>
+            <div>
+                <label for="password">
+                    password
+                    <input type="password" id="password">
+                </label>
+            </div>
+            <div class="btn-wrap">
+                <button id="sign-up">Sign Up</button>
+                <button id="sign-in">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="hidden-modal">
+        <div class="modal-form">
+            <h2>
+                Welcome to Site
+            </h2>
+
+            <form action="" id="form">
+                <label for="">
+                    username
+                    <input class="regist-form" type="text">
+                </label>
+                <label for="">
+                    password
+                    <input class="regist-form" type="password">
+                </label>
+                <button>
+                    Submit
+                </button>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        (() => {
+            const signIn = document.getElementById('sign-in');
+            const signUp = document.getElementById('sign-up');
+            const form = document.getElementById('form');
+            const hiddenModal = document.getElementById('hidden-modal');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('submit');
+                hiddenModal.style.display = 'none';
+            });
+            
+            hiddenModal.addEventListener('click', (e) => {
+                if(e.target === hiddenModal) {
+                    hiddenModal.style.display = 'none';
+                }
+            });
+
+            signIn.addEventListener('click', () => {
+                hiddenModal.style.display = 'flex';
+            });
+        })();
+    </script>
+</body>
+
+</html>
